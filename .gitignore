@@ -1,4 +1,6 @@
+RecordedClips/*
 Results/*
+CryptoLibraryKeys/*
 output/
 venv/
 temp/
@@ -17,3 +19,5 @@ testrun/*
 .~lock*
 *.pkl
 chromedriver.exe
+*.csv
+NarrationRecord.json
