@@ -21,6 +21,9 @@ class NarrationRecorder(object):
         self.__test_data["records"].append({"type": "narration", "time": datetime.now(), "message": message})
 
     def append_to_json(self):
+        # TODO: Remove later, this is just to compare the recorded duration vs the video file duration
+        self.__test_data["duration"] = (datetime.now() - self.__start_time).total_seconds()
+
         self.__datetimes_to_elapsed_times()
         with open("NarrationRecord.json", "r") as file:
             data = json.load(file)
