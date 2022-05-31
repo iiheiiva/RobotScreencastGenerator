@@ -18,3 +18,7 @@ testrun/*
 *.pkl
 chromedriver.exe
 *.mp4
+NarrationRecord.json
+/CryptoLibraryKeys/*
+/Results/*
+/RecordedClips/*

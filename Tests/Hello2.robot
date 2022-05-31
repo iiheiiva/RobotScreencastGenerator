@@ -17,7 +17,7 @@ ${BROWSER}          Chrome
 Google-haun tekeminen ${BROWSER}-selaimella
     Open Browser    http://www.google.com    ${BROWSER}
     Setup recording     # Resource keyword
-    Add narration    Klikataan ensin huomio ikkuna pois.
+    Add narration    Klikataan ensin huomioikkuna pois.
     Click Button    id=L2AGLb
     Add narration    Kirjoita haluamasi hakusana ja paina "enter".
     Input Text    name=q    Hello world!
