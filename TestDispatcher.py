@@ -57,6 +57,8 @@ def main():
     video = concatenate_videoclips(clips)
     video.write_videofile("Results/RawVideo.mp4")
 
+    # TODO: Add highlighting of html elements using coordinates
+
     # Add subtitles
     f_size = utilities.get_appropriate_font_size()
     generator = lambda txt: TextClip(txt, font='Arial', fontsize=f_size, color='white', bg_color='gray38')

@@ -56,6 +56,8 @@ def json_to_subtitles(start_times):
         for suite in data:
             for test in suite["tests"]:
                 for record in test["records"]:
+                    if record["type"] != "narration":
+                        continue
                     message = record["message"]
                     time = test_start[test_index] + record["time"]
                     endtime = time + subtitle_duration(message)

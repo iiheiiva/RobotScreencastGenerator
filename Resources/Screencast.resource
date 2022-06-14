@@ -12,7 +12,8 @@ Setup recording
     [Arguments]    ${speed}=0.2 seconds     ${pause}=3
     Set Selenium Speed    ${speed}
     Maximize Browser Window
-    Start Video Recording    alias=none    name=${SUITE NAME}_${TEST NAME}	    fps=None    size_percentage=1.0    embed=True    embed_width=100px    monitor=1
+    Start Video Recording    alias=none    name=${SUITE NAME}_${TEST NAME}	    fps=None    size_percentage=1.0
+    ...                      embed=True    embed_width=100px    monitor=1
     Narrator.initialize test narration    ${TEST NAME}
     Sleep    ${pause}
 Stop recording
@@ -27,4 +28,11 @@ Add narration
     [Arguments]    ${message}
     narrator.add narration    ${message}
     Sleep    3
+Highlight element
+    [Documentation]    Records the locations of a given element
+    ...                Does not invoke sleep so recommended to be used before "Add narration"
+    [Arguments]    ${locator}
+    ${element}=    Get WebElement    ${locator}
+    ${boundBox}=    Execute Javascript    return arguments[0].getBoundingClientRect();     ARGUMENTS    ${element}
+    narrator.highlight element    ${boundBox}
 

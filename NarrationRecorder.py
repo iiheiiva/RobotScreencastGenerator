@@ -20,6 +20,17 @@ class NarrationRecorder(object):
     def add_narration(self, message):
         self.__test_data["records"].append({"type": "narration", "time": datetime.now(), "message": message})
 
+    def highlight_element(self, dom_rect):
+        if dom_rect is None:
+            raise Exception("No bounding box found")
+        # TODO: use actual height for navigation bar of Google Chrome
+        #       this can be done with following javascript " window.outerHeight - window.innerHeight"
+        #       given that the browser is not zoomed in at 100%
+        y_offset = 103
+        coordinates = {"left": dom_rect.get("left"), "top": dom_rect.get("top")-y_offset,
+                       "right": dom_rect.get("right"), "bottom": dom_rect.get("bottom") - y_offset}
+        self.__test_data["records"].append({"type": "element", "time": datetime.now(), "coordinates": coordinates})
+
     def append_to_json(self):
         # TODO: Remove later, this is just to compare the recorded duration vs the video file duration
         self.__test_data["duration"] = (datetime.now() - self.__start_time).total_seconds()
