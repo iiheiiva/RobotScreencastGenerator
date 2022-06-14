@@ -66,6 +66,23 @@ def json_to_subtitles(start_times):
     return subtitles
 
 
+def json_to_elementlocations_and_timestamps(start_times):
+    test_start = start_times_2_cumulative_times(start_times)
+    coordinates = []
+    test_index = 0
+    with open("NarrationRecord.json", "r") as file:
+        data = json.load(file)
+        for suite in data:
+            for test in suite["tests"]:
+                for record in test["records"]:
+                    if record["type"] != "element":
+                        continue
+                    time = test_start[test_index] + record["time"]
+                    coordinates.append({"coordinates": record["coordinates"], "time": time})
+                test_index += 1
+    return coordinates
+
+
 def json_to_timestamps(start_times):
     timestamps = start_times_2_cumulative_times(start_times)
     test_index = 0
@@ -78,6 +95,19 @@ def json_to_timestamps(start_times):
                 result.append("%s: %s"%(timestamp, test["name"]))
                 test_index += 1
     return result
+
+
+def json_to_testcase_names_and_timestamps(start_times):
+    timestamps = start_times_2_cumulative_times(start_times)
+    names = []
+    test_index = 0
+    with open("NarrationRecord.json", "r") as file:
+        data = json.load(file)
+        for suite in data:
+            for test in suite["tests"]:
+                names.append({"name": test["name"], "time": timestamps[test_index]})
+                test_index += 1
+    return names
 
 
 def add_linebreaks(text, max_length=40):

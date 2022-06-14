@@ -57,17 +57,29 @@ def main():
     video = concatenate_videoclips(clips)
     video.write_videofile("Results/RawVideo.mp4")
 
-    # TODO: Add highlighting of html elements using coordinates
+    # Add highlighting of html elements using coordinates
+
+    # Get font size based on screen resolution
+    font_size = utilities.get_appropriate_font_size()
+
+    # Add titles
+    titles = utilities.json_to_testcase_names_and_timestamps(segment_durations)
+    clips = [video]
+    for title in titles:
+        title_clip = TextClip(title["name"], font='Carlito-Bold', fontsize=(font_size*1.1), color='white',
+                              stroke_color='black',  stroke_width=2)
+        title_clip = title_clip.set_position("center").set_duration(2.5).set_start(title["time"]).crossfadein(0.1).crossfadeout(0.25)
+        clips.append(title_clip)
 
     # Add subtitles
-    f_size = utilities.get_appropriate_font_size()
-    generator = lambda txt: TextClip(txt, font='Arial', fontsize=f_size, color='white', bg_color='gray38')
+    generator = lambda txt: TextClip(txt, font='Arial', fontsize=(font_size*0.9), color='white', bg_color='gray38')
     moviepy_subtitles = utilities.json_to_subtitles(segment_durations)
-    subtitles = SubtitlesClip(moviepy_subtitles, generator)
+    subtitles = SubtitlesClip(moviepy_subtitles, generator).set_position(('center', 'bottom')).set_opacity(0.9)
+
+    clips.append(subtitles)
 
     # Composite subtitles with the raw video
-    video = VideoFileClip("Results/RawVideo.mp4")
-    result = CompositeVideoClip([video, subtitles.set_position(('center', 'bottom')).set_opacity(0.9)])
+    result = CompositeVideoClip(clips)
     result.write_videofile("Results/HardCodedSubtitles.mp4", fps=video.fps, codec="libx264")
 
     # Add subtitles to /Results folder
