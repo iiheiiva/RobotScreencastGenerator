@@ -3,11 +3,11 @@
 ## Prerequisites
 
 * Project requires installation of chromedriver that matches your Chrome browser version
-* requirements.txt contains all the current packages from `pip freeze` command
+`requirements.txt` contains all the current packages from `pip freeze` command
 * In addition to this MoviePy requires ImageMagick to be separately installed (this might need some configuration on  Windows)
 * Hiding passwords is achieved with https://github.com/Snooz82/robotframework-crypto 
   * TODO: Place the keys and the password hash outside the project folder and refer to the location as a variable inside  a robot resource file to avoid accidental git commit inclusion
-
+``
 ## Example usage
 * TestDispatcher takes any number of `.robot` files as argument
 * Robot files `NarrationRecorder.py` library for recording timestamps and narration of the tutorial videos into `NarrationRecord.js`
@@ -19,6 +19,7 @@ py .\TestDispatcher.py .\Tests\Hello.robot .\Tests\Hello2.robot
 
 ### Example contents of NarrationRecord.js
 * Actual file would be all in one line
+* 
 ```json
 [
   {

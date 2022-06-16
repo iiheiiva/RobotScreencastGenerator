@@ -63,8 +63,6 @@ def main():
         except Exception:
             print("Aborting testing")
 
-    old_clips = []
-
     # Put newly recorded clips together in the order of creation
     clips = list(filter(os.path.isfile, glob.glob("RecordedClips/*.webm")))
     utilities.remove_blacklisted(clips, old_clips)
@@ -120,9 +118,9 @@ def main():
     # Add subtitles
     generator = lambda txt: TextClip(txt, font='Arial', fontsize=(font_size*0.9), color='white', bg_color='gray38')
     moviepy_subtitles = utilities.json_to_subtitles(segment_durations)
-    subtitles = SubtitlesClip(moviepy_subtitles, generator).set_position(('center', 'bottom')).set_opacity(0.9)
-
-    clips.append(subtitles)
+    if (len(moviepy_subtitles) > 0):
+        subtitles = SubtitlesClip(moviepy_subtitles, generator).set_position(('center', 'bottom')).set_opacity(0.9)
+        clips.append(subtitles)
 
     # Composite subtitles with the raw video
     result = CompositeVideoClip(clips)
