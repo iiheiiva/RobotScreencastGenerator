@@ -83,6 +83,18 @@ def json_to_elementlocations_and_timestamps(start_times):
     return coordinates
 
 
+def coordinates_to_dimensions(coordinates):
+    width = coordinates["right"] - coordinates["left"]
+    height = coordinates["bottom"] - coordinates["top"]
+    return {"width": width, "height": height}
+
+
+def coordinates_to_center(coordinates):
+    x = coordinates["left"] + ((coordinates["right"]-coordinates["left"]) / 2)
+    y = coordinates["top"] + ((coordinates["bottom"]-coordinates["top"]) / 2)
+    return {"x": x, "y": y}
+
+
 def json_to_timestamps(start_times):
     timestamps = start_times_2_cumulative_times(start_times)
     test_index = 0
@@ -139,6 +151,10 @@ def insert_to_list(original_list, insert, index):
     beginning = original_list[0:index]
     end = original_list[index:len(original_list)]
     return beginning + insert + end
+
+
+def get_resolution():
+    return pyautogui.size()
 
 
 

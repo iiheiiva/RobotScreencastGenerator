@@ -25,6 +25,9 @@ Sovellusasetusten muuttaminen
 
     Add narration    Verkkosovelluksen käyttäminen vaatii kirjautumistiedot.
 
+    highlight element    id=username
+    highlight element    id=password
+
     Input Text    id=username   iiro.iivanainen@jalonne.fi
     Input Password    id=password    ${encoded_pwd}
     click button        id=login-button
@@ -36,6 +39,7 @@ Sovellusasetusten muuttaminen
     click button    id=app-profiles-admin-page-button
     Click Element    //ons-icon[@class="ons-icon zmdi zmdi-plus"]
 
+    highlight element    id=app-profiles-admin-page-button
     Add narration    Lisätään sovellusprofiiliin halutut tiedot.
 
     Input Text    //input[@name="name"]    TestProfile

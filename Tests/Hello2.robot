@@ -17,9 +17,9 @@ ${BROWSER}          Chrome
 Google-haun tekeminen ${BROWSER}-selaimella
     Open Browser    http://www.google.com    ${BROWSER}
     Setup recording     # Resource keyword
-    Add narration    Klikataan ensin huomioikkuna pois.
 
     Highlight element    id=L2AGLb
+    Add narration    Klikataan ensin huomioikkuna pois.
 
     Click Button    id=L2AGLb
     Add narration    Kirjoita haluamasi hakusana ja paina "enter".
@@ -29,6 +29,9 @@ Google-haun tekeminen ${BROWSER}-selaimella
 Bing-haun tekeminen
     Open Browser    https://www.bing.com/    ${BROWSER}
     Setup recording
+
+    highlight element    id=sb_form
+
     Add narration    Kirjoita haluamasi hakusana ja paina "enter".
     Input Text    id=sb_form_q    Hello bing!
     Stop recording
